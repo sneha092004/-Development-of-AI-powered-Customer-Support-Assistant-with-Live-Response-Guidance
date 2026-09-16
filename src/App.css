@@ -812,6 +812,16 @@ footer {
     color: #111827;
 }
 
+.agent-draft-message .message-content {
+    background: #ede9fe;
+    color: #4c1d95;
+    border: 1px solid #c4b5fd;
+}
+
+.agent-draft-message .message-avatar {
+    background: #ddd6fe;
+}
+
 .typing-loader {
     display: flex;
     gap: 5px;
@@ -1004,7 +1014,8 @@ footer {
     border-bottom: none;
 }
 
-.analysis-item span {
+
+/* .analysis-item span {
     font-size: 11px;
     color: #374151;
 }
@@ -1013,6 +1024,33 @@ footer {
     font-size: 11px;
     color: #111827;
     text-align: right;
+} */
+
+
+/* .analysis-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eef0f3;
+    flex-wrap: nowrap;
+} */
+
+.analysis-item span {
+    font-size: 11px;
+    color: #374151;
+    white-space: nowrap;
+}
+
+.analysis-item strong {
+    font-size: 11px;
+    color: #111827;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 60%;
 }
 
 
@@ -1281,6 +1319,10 @@ footer {
     .send-button {
         min-width: 55px;
         font-size: 10px;
+    }
+    .agent-draft-message .message-content {
+        background: #eef2ff;
+        border: 1px dashed #6366f1;
     }
 }
 

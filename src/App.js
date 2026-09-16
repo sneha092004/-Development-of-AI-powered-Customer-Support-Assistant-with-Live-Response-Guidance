@@ -1,16 +1,19 @@
 
-
 import { useState } from "react";
 import "./App.css";
 import ChatPage from "./components/ChatPage";
 import OrdersPage from "./components/OrdersPage";
 import SupportPage from "./components/SupportPage";
 import AgentLoginPage from "./components/AgentLoginPage";
+import translations from "./translations";
 
 function App() {
   const [page, setPage] = useState("home");
   const [isAgentLoggedIn, setIsAgentLoggedIn] = useState(false);
   const [agentName, setAgentName] = useState("");
+  const [language, setLanguage] = useState("English");
+
+  const t = translations[language] || translations.English;
 
   function handleLoginSuccess(username) {
     setIsAgentLoggedIn(true);
@@ -39,7 +42,7 @@ function App() {
               className="login"
               onClick={handleLogout}
             >
-              Logout
+              {t.logout}
             </button>
           </div>
         ) : (
@@ -47,7 +50,7 @@ function App() {
             className="login"
             onClick={() => setPage("agentLogin")}
           >
-            Agent Login
+            {t.agentLogin}
           </button>
         )}
       </nav>
@@ -67,7 +70,7 @@ function App() {
                 setPage("home");
               }}
             >
-              Home
+              {t.navHome}
             </a>
           </li>
 
@@ -84,7 +87,7 @@ function App() {
                 setPage("chat");
               }}
             >
-              AI Chat
+              {t.navChat}
             </a>
           </li>
 
@@ -101,7 +104,7 @@ function App() {
                 setPage("orders");
               }}
             >
-              Orders
+              {t.navOrders}
             </a>
           </li>
 
@@ -118,22 +121,26 @@ function App() {
                 setPage("support");
               }}
             >
-              Support
+              {t.navSupport}
             </a>
           </li>
 
           <li>
-            <select className="language">
-              <option>🌐 English</option>
-              <option>Hindi</option>
-              <option>Marathi</option>
-              <option>Gujarati</option>
-              <option>Punjabi</option>
-              <option>Tamil</option>
-              <option>Telugu</option>
-              <option>Kannada</option>
-              <option>Malayalam</option>
-              <option>Bengali</option>
+            <select
+              className="language"
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+            >
+              <option value="English">🌐 English</option>
+              <option value="Hindi">Hindi</option>
+              <option value="Marathi">Marathi</option>
+              <option value="Gujarati">Gujarati</option>
+              <option value="Punjabi">Punjabi</option>
+              <option value="Tamil">Tamil</option>
+              <option value="Telugu">Telugu</option>
+              <option value="Kannada">Kannada</option>
+              <option value="Malayalam">Malayalam</option>
+              <option value="Bengali">Bengali</option>
             </select>
           </li>
         </ul>
@@ -143,99 +150,73 @@ function App() {
         <>
           {isAgentLoggedIn && (
             <div className="agent-welcome-banner">
-              ✅ Logged in as Agent{" "}
-              <strong>{agentName}</strong> — you now
-              have access to the Agent Dashboard inside AI Chat.
+              {t.agentWelcomePrefix}{" "}
+              <strong>{agentName}</strong> {t.agentWelcomeSuffix}
             </div>
           )}
 
           <section className="hero">
-            <h1>AI-Powered Customer Support</h1>
+            <h1>{t.heroTitle}</h1>
 
-            <p>
-              Deliver faster, smarter and more personalized
-              customer support with Artificial Intelligence.
-            </p>
+            <p>{t.heroSubtitle}</p>
 
             <button
               className="start"
               onClick={() => setPage("chat")}
             >
-              Start Chat
+              {t.startChat}
             </button>
           </section>
 
           <section className="main-content">
             <div className="features">
-              <h2>Our Features</h2>
+              <h2>{t.featuresTitle}</h2>
 
               <div className="cards">
                 <div className="card">
-                  <h3>💬 Live Chat</h3>
-                  <p>
-                    Real-time communication with customers.
-                  </p>
+                  <h3>{t.feature1Title}</h3>
+                  <p>{t.feature1Desc}</p>
                 </div>
 
                 <div className="card">
-                  <h3>😊 Sentiment Analysis</h3>
-                  <p>
-                    Detect customer emotions and satisfaction.
-                  </p>
+                  <h3>{t.feature2Title}</h3>
+                  <p>{t.feature2Desc}</p>
                 </div>
 
                 <div className="card">
-                  <h3>🎯 Intent Detection</h3>
-                  <p>
-                    Understand customer needs and requests.
-                  </p>
+                  <h3>{t.feature3Title}</h3>
+                  <p>{t.feature3Desc}</p>
                 </div>
 
                 <div className="card">
-                  <h3>🤖 AI Reply</h3>
-                  <p>
-                    Generate smart and helpful responses.
-                  </p>
+                  <h3>{t.feature4Title}</h3>
+                  <p>{t.feature4Desc}</p>
                 </div>
 
                 <div className="card">
-                  <h3>🧠 Agent Coaching</h3>
-                  <p>
-                    Provide real-time guidance to support agents.
-                  </p>
+                  <h3>{t.feature5Title}</h3>
+                  <p>{t.feature5Desc}</p>
                 </div>
 
                 <div className="card">
-                  <h3>📎 File Upload</h3>
-                  <p>
-                    Upload invoices or product images for support.
-                  </p>
+                  <h3>{t.feature6Title}</h3>
+                  <p>{t.feature6Desc}</p>
                 </div>
               </div>
             </div>
           </section>
 
           <section className="about">
-            <h2>About the Project</h2>
+            <h2>{t.aboutTitle}</h2>
 
-            <p>
-              A Customer Support Assistant is an intelligent
-              customer support system designed to analyze
-              customer conversations and provide real-time
-              assistance to support agents.
-            </p>
+            <p>{t.aboutText1}</p>
 
-            <p>
-              The system uses Artificial Intelligence to perform
-              sentiment analysis, intent detection, urgency
-              detection and escalation risk detection while
-              providing useful coaching suggestions to agents.
-            </p>
+            <p>{t.aboutText2}</p>
           </section>
         </>
       )}
 
-      {page === "chat" && <ChatPage />}
+      {page === "chat" && <ChatPage language={language} />}
 
       {page === "orders" && (
         <OrdersPage
@@ -256,9 +237,7 @@ function App() {
         />
       )}
 
-      <footer>
-        © 2026 Development of AI-powered Customer Support Assistant with Live Response Guidance
-      </footer>
+      <footer>{t.footerText}</footer>
     </div>
   );
 }
