@@ -1,70 +1,98 @@
-# Getting Started with Create React App
+# AI-Powered Customer Support Assistant with Live Response Guidance
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A web app that helps customer support agents reply faster and better. It reads each customer message, detects **sentiment** and **intent**, and shows live reply suggestions to the agent.
 
-## Available Scripts
+Built during my internship at **Infosys Springboard** (22 July - 29 September 2026), mentored by Mrs. Amrita A.
 
-In the project directory, you can run:
+## Screenshots
 
-### `npm start`
+<!-- Add 2-3 screenshots in a "screenshots" folder, then keep or edit these lines -->
+![Chat screen](screenshots/chat.png)
+![Agent Dashboard](screenshots/dashboard.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Features
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Sentiment analysis** of customer messages (DistilBERT)
+- **Intent classification** using zero-shot learning (DistilBART)
+- **Agent Dashboard** showing sentiment, intent and suggested replies
+- **Editable draft replies**: suggestions fill the input box so the agent can review before sending
+- **Multilingual UI** with a language selector
+- **Voice input** using the Web Speech API (works best in Chrome)
+- **Chat history** saved in the browser with `localStorage`
+- **Order tracking** with data from MongoDB Atlas
 
-### `npm test`
+## Tech Stack
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+| Part | Tools |
+|---|---|
+| Frontend | React, react-leaflet, Leaflet |
+| Backend | Python, Flask |
+| AI / NLP | HuggingFace Transformers (DistilBERT, DistilBART), pypdf |
+| Database | MongoDB Atlas |
+| Browser APIs | Web Speech API, localStorage |
 
-### `npm run build`
+## Project Structure
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```
+.
+├── backend/
+│   ├── app.py             # Flask server and API routes
+│   ├── ai_logic.py        # Sentiment, intent and response logic
+│   ├── requirements.txt   # Python packages
+│   └── .env.example       # Template for environment variables
+├── public/
+├── src/
+│   ├── App.js             # Main React app
+│   └── translations.js    # Language translations
+├── package.json
+└── README.md
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## How to Run
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 1. Clone the repo
+```bash
+git clone https://github.com/sneha092004/-Development-of-AI-powered-Customer-Support-Assistant-with-Live-Response-Guidance.git
+cd -Development-of-AI-powered-Customer-Support-Assistant-with-Live-Response-Guidance
+```
 
-### `npm run eject`
+### 2. Backend
+```bash
+cd backend
+pip install -r requirements.txt
+cp .env.example .env        # then add your MongoDB connection string
+python app.py
+```
+The first run downloads the HuggingFace models, so it can take a few minutes.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### 3. Frontend
+Open a new terminal in the project root:
+```bash
+npm install
+npm start
+```
+Open http://localhost:3000 in **Chrome**.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## How It Works
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+1. The customer sends a message from the chat screen.
+2. The Flask `/chat` route passes it to `ai_logic.py`.
+3. DistilBERT detects the sentiment and DistilBART detects the intent.
+4. The Agent Dashboard shows the result with a suggested reply.
+5. The agent edits the draft and sends it.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Known Notes
 
-## Learn More
+- Voice input can be unreliable in Edge on localhost. Use Chrome.
+- If the dashboard shows blank values, clear old chat history: run `localStorage.clear()` in the browser console.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Future Improvements
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- More dashboard widgets
+- Support for more languages and intents
+- Deploy the app online
 
-### Code Splitting
+## Author
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Sneha Singh**, B.Tech AI & DS
+GitHub: [sneha092004](https://github.com/sneha092004)
