@@ -7,8 +7,8 @@ Built during my internship at **Infosys Springboard** (22 July - 29 September 20
 ## Screenshots
 
 <!-- Add 2-3 screenshots in a "screenshots" folder, then keep or edit these lines -->
-![Chat screen](screenshots/chat.png)
-![Agent Dashboard](screenshots/dashboard.png)
+![Chat](chat.png)
+![Dashboard](Dashboard.png)
 
 ## Features
 
